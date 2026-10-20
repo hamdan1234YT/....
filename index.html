@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Error</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: radial-gradient(ellipse at center, #063d20, #00170b 70%, #000);
+  color: #00ff66;
+  font-family: Consolas, monospace;
+  text-align: center;
+  padding: 25px 15px;
+}
+
+.star {
+  position: fixed;
+  top: -20px;
+  color: white;
+  pointer-events: none;
+  animation: fall linear infinite;
+  z-index: 0;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+  margin: 35px auto;
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #00ff66;
+  box-shadow: 0 0 25px #00ff6633;
+  overflow: hidden;
+}
+
+.glitch {
+  color: #ff3030;
+  font-weight: bold;
+  text-shadow: 2px 0 red, -2px 0 cyan;
+  animation: glitch 0.15s infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(3px, -2px); }
+  60% { transform: translate(-2px, -1px); }
+  80% { transform: translate(2px, 1px); }
+  100% { transform: translate(0); }
+}
+
+.binary {
+  color: #00ff66;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+  animation: flicker 0.4s infinite alternate,
+             shake 0.2s infinite;
+}
+
+@keyframes flicker {
+  from { opacity: 0.25; }
+  to { opacity: 1; }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(2px); }
+  50% { transform: translateX(-2px); }
+  75% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+
+.loader {
+  font-size: 22px;
+  animation: flicker 0.5s infinite alternate;
+}
+
+.hidden {
+  display: none;
+}
+
+.warning {
+  color: #ff3030;
+  border: 1px dashed red;
+  padding: 12px;
+  margin: 20px 0;
+  animation: flicker 0.7s infinite alternate;
+}
+
+button {
+  margin-top: 25px;
+  background: #001a0a;
+  border: 2px solid #00ff66;
+  color: #00ff66;
+  font: bold 20px Consolas, monospace;
+  padding: 12px 35px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00ff6655;
+}
+
+button:hover {
+  background: #00ff66;
+  color: black;
+}
+
+.small {
+  color: #8aa995;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div id="loading">
+    <div class="loader">INITIALIZING SYSTEM...</div>
+    <p class="binary">01001000 01000101 01001100 01010000</p>
+    <p>PLEASE WAIT<span id="dots">...</span></p>
+  </div>
+
+  <div id="main" class="hidden">
+    <h1 class="glitch">☠ UNKNOWN ENTITY ☠</h1>
+
+    <div class="warning">
+      ⚠ SYSTEM ERROR: 0x000666<br>
+      UNKNOWN SIGNAL DETECTED<br>
+      CONNECTION STATUS: UNKNOWN
+    </div>
+
+    <p class="binary">
+      00010000100001000<br>
+      10101010100101010<br>
+      01001011100010101<br>
+      11100001010110001<br>
+      01010101 111000 000111<br>
+      SIGNAL_LOST_SIGNAL_LOST
+    </p>
+
+    <h2 class="glitch">W̸E̷ ̵A̸R̷E̵ ̷W̴A̵T̸C̶H̵I̸N̷G̵</h2>
+
+    <p>INCOMING TRANSMISSION...</p>
+    <p class="glitch">SYSTEM RESPONSE: NOT FOUND</p>
+    <p class="binary">
+      00000000 11111111 00000000<br>
+      10110101 01010101 11001010<br>
+      00110011 00001111 10101010
+    </p>
+
+    <p>UNKNOWN SIGNAL RECEIVED...</p>
+    <p>TIME: 03:33:33</p>
+    <p>ENTITY: UNKNOWN</p>
+
+    <h2 class="glitch">
+      W̷A̷K̷E̷ ̷U̷P̷
+    </h2>
+
+    <div class="warning">
+      ⚠ TRANSMISSION INTERRUPTED ⚠<br>
+      SIGNAL LOST... SIGNAL LOST...<br>
+      0x000666 // ERROR // ERROR
+    </div>
+
+    <p class="small">
+      Fictional visual prank only. No device has been accessed.
+    </p>
+
+    <button id="exit">[ EXIT ]</button>
+  </div>
+</div>
+
+<script>
+// Falling white stars
+for (let i = 0; i < 45; i++) {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.textContent = "✦";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.animationDuration = (3 + Math.random() * 7) + "s";
+  star.style.animationDelay = (Math.random() * 5) + "s";
+  star.style.fontSize = (8 + Math.random() * 13) + "px";
+  document.body.appendChild(star);
+}
+
+// Loading dots
+let dotCount = 0;
+setInterval(() => {
+  dotCount = (dotCount + 1) % 4;
+  const dots = document.getElementById("dots");
+  if (dots) dots.textContent = ".".repeat(dotCount + 1);
+}, 350);
+
+// Show the prank screen after five seconds
+setTimeout(() => {
+  document.getElementById("loading").classList.add("hidden");
+  document.getElementById("main").classList.remove("hidden");
+  document.title = "System Error";
+}, 5000);
+
+// Contents of the downloaded note
+const message = `╔══════════════════════════════════╗
+       ☠ SYSTEM FAILURE ☠
+          ERROR 0x000666
+╚══════════════════════════════════╝
+
+[!] UNKNOWN ENTITY DETECTED
+[!] SYSTEM RESPONSE: NOT FOUND
+[!] SIGNAL STATUS: UNKNOWN
+
+00010000100001000
+10101010100101010
+01001011100010101
+11100001010110001
+01010101 111000 000111
+00000000 11111111 00000000
+10110101 01010101 11001010
+00110011 00001111 10101010
+
+W̸E̷ ̵A̸R̷E̵ ̷W̴A̵T̸C̶H̵I̸N̷G̵
+
+----------------------------------
+       INCOMING TRANSMISSION
+----------------------------------
+
+03:33:33 — SIGNAL RECEIVED
+03:33:34 — SIGNAL LOST
+03:33:35 — SIGNAL RECEIVED AGAIN
+
+UNKNOWN ENTITY...
+UNKNOWN SOURCE...
+UNKNOWN RESPONSE...
+
+0x000666 // ERROR
+0x000666 // ERROR
+0x000666 // ERROR
+
+W̷A̷K̷E̷ ̷U̷P̷
+
+D̴O̴ ̴N̴O̴T̴ ̴L̴O̴O̴K̴ ̴B̴E̴H̴I̴N̴D̴ ̴Y̴O̴U̴
+
+01001000 01000101 01001100 01010000
+11100001 00010101 10101010 00000011
+SIGNAL_LOST_SIGNAL_LOST_SIGNAL_LOST
+
+[TRANSMISSION TERMINATED]
+
+WHY IS THE SIGNAL STILL HERE?
+WHO SENT THIS MESSAGE?
+UNKNOWN ENTITY DETECTED...
+
+----------------------------------
+address leaked by h2md3nmdahdahj
+----------------------------------`;
+
+// Download note when EXIT is clicked
+document.getElementById("exit").addEventListener("click", () => {
+  const blob = new Blob([message], {
+    type: "text/plain;charset=utf-8"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "SYSTEM_ERROR.txt";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+});
+</script>
+
+</body>
+</html>
